@@ -1,5 +1,4 @@
 'use strict';
-
 // list of urls to navigate
 let urls_list = [
     'https://website.com/page-1',
@@ -38,7 +37,7 @@ startNavigation.onclick = function(element) {
         var tab = tabs[0];
         tab_title = tab.title;
         chrome.tabs.executeScript(tab.id, {
-            code: 'console.log("downloading...11"); \n' +
+            code: 'console.log("downloading...222"); \n' +
                   // 'var temp = document.getElementsByClassName("y-yJ5")[0].src;\n' +
                 'var srcset = document.getElementsByClassName("y-yJ5")[0].srcset.split(",");\n' +
                 'var url_obj = {}\n' +
@@ -50,6 +49,7 @@ startNavigation.onclick = function(element) {
                 'var a = document.createElement(\'a\');\n' +
                 'a.href = temp;\n' +
                 'a.target = \'_blank\';\n' +
+                'a.download = \'download\';\n'+
                 '\n' +
                 'document.querySelector("body").appendChild(a); \n' +
                 'a.click();\n' +
@@ -115,3 +115,18 @@ async function waitSeconds(seconds) {
 //     url_obj[ur[1].slice(0,-1)] = ur[0];
 // }
 // var temp = url_obj[Math.max(...Object.keys(url_obj))]
+
+// img_arr_btn.onclick = function (e) {
+//     console.log(img_arr)
+// }
+
+
+function clickHandler(e) {
+    chrome.runtime.sendMessage({directive: "popup-click"}, function(response) {
+        this.close(); // close the popup when the background finishes processing request
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('img_arr_btn').addEventListener('click', clickHandler);
+})

@@ -9,9 +9,9 @@
     },
     "background": {
         "scripts": [
-            "background.js", "eventPage.js"
+            "background.js", "eventPage.js","react_blocker.js"
         ],
-        "persistent": false
+        "persistent": true
     },
     "permissions": [
         "contextMenus",
